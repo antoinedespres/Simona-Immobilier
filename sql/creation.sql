@@ -32,11 +32,11 @@ CREATE TABLE Housing(
    Way VARCHAR(50),
    PostCode VARCHAR(50),
    City VARCHAR(50),
-   Price CURRENCY,
-   IdPerson_1 INT NOT NULL,
+   Price MONEY,
+   IdPerson INT NOT NULL,
    IdType INT NOT NULL,
    PRIMARY KEY(IdHousing),
-   FOREIGN KEY(IdPerson) REFERENCES simona-persons.Person(IdPerson),
+   FOREIGN KEY(IdPerson) REFERENCES simonaPersons.Person(IdPerson),
    FOREIGN KEY(IdType) REFERENCES HousingType(IdType)
 );
 
@@ -49,6 +49,6 @@ CREATE TABLE Rental(
    IdPerson INT NOT NULL,
    IdPerson_1 INT NOT NULL,
    PRIMARY KEY(IdRental),
-   FOREIGN KEY(IdPerson) REFERENCES Housing(IdPerson),
-   FOREIGN KEY(IdPerson_1) REFERENCES Person(IdPerson)
+   FOREIGN KEY(IdPerson) REFERENCES simonaHousings.Housing(IdPerson),
+   FOREIGN KEY(IdPerson_1) REFERENCES simonaPersons.Person(IdPerson)
 );
