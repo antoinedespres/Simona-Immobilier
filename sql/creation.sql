@@ -7,45 +7,45 @@ CREATE TABLE Role(
 );
 
 CREATE TABLE Person(
-   IdPerson SERIAL,
+   Id SERIAL,
    LastName VARCHAR(50),
    FirstName VARCHAR(50),
    Login VARCHAR(50),
    Password VARCHAR(50),
    IdRole INT NOT NULL,
-   PRIMARY KEY(IdPerson),
+   PRIMARY KEY(Id),
    FOREIGN KEY(IdRole) REFERENCES Role(Id)
 );
 
 -- simona-housings
 
 CREATE TABLE HousingType(
-   IdType SERIAL,
+   Id SERIAL,
    Label VARCHAR(50),
    PRIMARY KEY(IdType)
 );
 
 CREATE TABLE Housing(
-   IdHousing SERIAL,
+   Id SERIAL,
    Surface INT,
    NbRooms INT,
    Way VARCHAR(50),
    PostCode VARCHAR(50),
    City VARCHAR(50),
    Price MONEY,
-   IdPerson INT NOT NULL,
+   IdLandlord INT NOT NULL, -- FK Account
    IdType INT NOT NULL,
-   PRIMARY KEY(IdHousing),
+   PRIMARY KEY(Id),
    FOREIGN KEY(IdType) REFERENCES HousingType(Id)
 );
 
 -- simona-rentals
 
 CREATE TABLE Rental(
-   IdRental SERIAL,
-   StartDate VARCHAR(50),
+   Id SERIAL,
+   StartDate DATE,
    EndDate DATE,
-   IdPerson INT NOT NULL,
-   IdHousing INT NOT NULL,
-   PRIMARY KEY(IdRental),
+   IdTenant INT NOT NULL, -- FK Account
+   IdHousing INT NOT NULL, -- FK Housing
+   PRIMARY KEY(Id),
 );
