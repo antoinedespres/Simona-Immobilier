@@ -1,0 +1,5 @@
+- mock calls au backend
+- (vue locataire) recherche de logements (2/"recherche de logement")
+- (vue locataire) création de demande de locations (4/"réservation de logement")
+- (vue propriétaire) création de logement
+- (vue propriétaire) vue (et validation ?) des demandes de loc

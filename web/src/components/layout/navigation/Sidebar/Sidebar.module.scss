@@ -1,0 +1,8 @@
+@use '@styles/variables' as v;
+
+.sidebar {
+	height: 100%;
+	background: v.$color-surface;
+	padding: v.$spacing-padding;
+	border-right: v.$border;
+}
