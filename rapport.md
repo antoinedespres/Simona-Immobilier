@@ -2,6 +2,12 @@
 
 ## By ARNOULT Aymeric - BRAL Laurie - CHEN Xing - DANG Mélanie - DESPRES Antoine - EA Jean-Jacques
 
+Trois micro-services, une permettant de gérer les données des utilisateurs, une pour gérer les habitations et une dernière pour la location de ces derniers :
+Nous avons donc trois bases de données : Housing - Personne - Rentals
+
+![image](https://user-images.githubusercontent.com/93189167/227244975-ea603e87-b5bc-4abe-97ee-c4c604e52405.png)
+
+
 ### Dépendances utilisées dans le FrontEnd :
 | Nom          | Description                                                                                  | Version     |  
 | ------------ | -------------------------------------------------------------------------------------------- | ----------- |
