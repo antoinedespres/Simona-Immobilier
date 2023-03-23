@@ -1,9 +1,9 @@
 -- simona-persons
 
 CREATE TABLE Role(
-   IdRole SERIAL,
+   Id SERIAL,
    Label VARCHAR(50),
-   PRIMARY KEY(IdRole)
+   PRIMARY KEY(Id)
 );
 
 CREATE TABLE Person(
@@ -14,7 +14,7 @@ CREATE TABLE Person(
    Password VARCHAR(50),
    IdRole INT NOT NULL,
    PRIMARY KEY(IdPerson),
-   FOREIGN KEY(IdRole) REFERENCES Role(IdRole)
+   FOREIGN KEY(IdRole) REFERENCES Role(Id)
 );
 
 -- simona-housings
@@ -36,8 +36,7 @@ CREATE TABLE Housing(
    IdPerson INT NOT NULL,
    IdType INT NOT NULL,
    PRIMARY KEY(IdHousing),
-   FOREIGN KEY(IdPerson) REFERENCES simonaPersons.Person(IdPerson),
-   FOREIGN KEY(IdType) REFERENCES HousingType(IdType)
+   FOREIGN KEY(IdType) REFERENCES HousingType(Id)
 );
 
 -- simona-rentals
@@ -47,8 +46,6 @@ CREATE TABLE Rental(
    StartDate VARCHAR(50),
    EndDate DATE,
    IdPerson INT NOT NULL,
-   IdPerson_1 INT NOT NULL,
+   IdHousing INT NOT NULL,
    PRIMARY KEY(IdRental),
-   FOREIGN KEY(IdPerson) REFERENCES simonaHousings.Housing(IdPerson),
-   FOREIGN KEY(IdPerson_1) REFERENCES simonaPersons.Person(IdPerson)
 );
