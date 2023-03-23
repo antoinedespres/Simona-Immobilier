@@ -1,13 +1,13 @@
-package com.simona.simonaimmobilier;
+package com.housing.housing;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SimonaImmobilierApplication {
+public class HousingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SimonaImmobilierApplication.class, args);
+		SpringApplication.run(HousingApplication.class, args);
 	}
 
 }

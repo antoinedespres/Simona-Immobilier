@@ -1,10 +1,10 @@
-package com.simona.simonaimmobilier;
+package com.housing.housing;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SimonaImmobilierApplicationTests {
+class HousingApplicationTests {
 
 	@Test
 	void contextLoads() {
