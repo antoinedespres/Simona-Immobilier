@@ -26,7 +26,7 @@ CREATE TABLE HousingType(
 );
 
 CREATE TABLE Housing(
-   IdPerson SERIAL,
+   IdHousing SERIAL,
    Surface INT,
    NbRooms INT,
    Way VARCHAR(50),
@@ -35,8 +35,8 @@ CREATE TABLE Housing(
    Price CURRENCY,
    IdPerson_1 INT NOT NULL,
    IdType INT NOT NULL,
-   PRIMARY KEY(IdPerson),
-   FOREIGN KEY(IdPerson_1) REFERENCES Person(IdPerson),
+   PRIMARY KEY(IdHousing),
+   FOREIGN KEY(IdPerson) REFERENCES simona-persons.Person(IdPerson),
    FOREIGN KEY(IdType) REFERENCES HousingType(IdType)
 );
 
