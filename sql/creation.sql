@@ -22,7 +22,7 @@ CREATE TABLE Account(
 CREATE TABLE HousingType(
    Id SERIAL,
    Label VARCHAR(50),
-   PRIMARY KEY(IdType)
+   PRIMARY KEY(Id)
 );
 
 CREATE TABLE Housing(
