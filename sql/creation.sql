@@ -6,7 +6,7 @@ CREATE TABLE Role(
    PRIMARY KEY(Id)
 );
 
-CREATE TABLE Person(
+CREATE TABLE Account(
    Id SERIAL,
    LastName VARCHAR(50),
    FirstName VARCHAR(50),
