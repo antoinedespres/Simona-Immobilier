@@ -8,11 +8,11 @@
 		<version>2.7.10</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.housing</groupId>
-	<artifactId>housing</artifactId>
+	<groupId>com.simonaimmobilier.housing</groupId>
+	<artifactId>housing-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>housing</name>
-	<description>Housing microservice</description>
+	<name>housing-service</name>
+	<description>Housing service</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
