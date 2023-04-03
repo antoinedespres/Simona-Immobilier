@@ -4,6 +4,10 @@
 
 Une application de location de logement basée sur l'architecture des microservices.
 
+## Getting started
+
+You can generate a new microservice using [this configuration on Spring initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.7.10&packaging=jar&jvmVersion=11&groupId=com.simonaimmobilier.rental&artifactId=rental-service&name=rental-service&description=Rental%20service&packageName=com.simona.rental&dependencies=web,data-jpa,postgresql)
+
 ## Usage
 
 Connect to the PostgreSQL interactive terminal `psq` with the built-in user `postgres`:
