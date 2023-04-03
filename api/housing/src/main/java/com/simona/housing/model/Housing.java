@@ -1,10 +1,6 @@
 package com.simona.housing.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Housing {
@@ -14,16 +10,15 @@ public class Housing {
     private int surface;
     private int nbRooms;
     private String street;
-    private String postCode;
+    private String postalCode;
     private String city;
     private double price;
     private long landlordId;
     private long typeId;
-    @OneToMany(mappedBy = "housing")
-    private List<Rental> rentals = new ArrayList<>();
 
     public Housing() {
     }
+
     public long getId() {
         return id;
     }
@@ -56,12 +51,12 @@ public class Housing {
         this.street = street;
     }
 
-    public String getPostCode() {
-        return postCode;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
+    public void setPostalCode(String postCode) {
+        this.postalCode = postCode;
     }
 
     public String getCity() {
@@ -94,13 +89,5 @@ public class Housing {
 
     public void setTypeId(long typeId) {
         this.typeId = typeId;
-    }
-
-    public List<Rental> getRentals() {
-        return rentals;
-    }
-
-    public void setRentals(List<Rental> rentals) {
-        this.rentals = rentals;
     }
 }
