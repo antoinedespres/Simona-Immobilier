@@ -1,23 +1,34 @@
 package com.simona.housing.web.controller;
 
+import com.simona.housing.dto.HousingDto;
+import com.simona.housing.dto.RentalDto;
 import com.simona.housing.model.Housing;
 import com.simona.housing.web.repository.HousingRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class HousingController {
     private final HousingRepository housingRepository;
 
-    HousingController(HousingRepository housingRepository) {
+    private final WebClient webClient;
+
+    @Value("${gateway-url}")
+    private String gatewayUrl;
+
+    HousingController(HousingRepository housingRepository, WebClient webClient) {
         this.housingRepository = housingRepository;
+        this.webClient = webClient;
     }
 
     @GetMapping("/housings")
@@ -27,8 +38,18 @@ public class HousingController {
     }
 
     @GetMapping("/housings/{id}")
-    public Housing findById(@PathVariable long id) {
-        return housingRepository.findById(id);
+    public HousingDto findById(@PathVariable long id) {
+        Housing foundHousing = housingRepository.findById(id);
+
+        HousingDto housingDto = new HousingDto();
+        List<RentalDto> rentals = webClient.get()
+                .uri(String.format("%s/rentals/rental?housingId=%s", gatewayUrl, id))
+                .retrieve()
+                .bodyToFlux(RentalDto.class)
+                .collectList()
+                .block();
+
+        return housingDto.toDto(foundHousing, rentals);
     }
 
     @PostMapping("/housings")

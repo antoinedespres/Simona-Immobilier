@@ -4,12 +4,14 @@ import com.simona.rental.model.Rental;
 import com.simona.rental.web.repository.RentalRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,7 +25,13 @@ public class RentalController {
     @GetMapping("/rentals")
     public Page<Rental> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
                                 @RequestParam(defaultValue = "id") String sortBy) {
-        return rentalRepository.findAll(PageRequest.of(page, size, Sort.by(sortBy)));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+            return rentalRepository.findAll(pageable);
+    }
+
+    @GetMapping("/rentals/rental")
+    public List<Rental> findByHousingId(@RequestParam long housingId) {
+        return rentalRepository.findByHousingId(housingId);
     }
 
     @GetMapping("/rentals/{id}")
