@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import: "optional:configserver:"
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: rental-service
+          uri: lb://rental-service
+          predicates:
+            - Path=/rentals/**
+        - id: housing-service
+          uri: lb://housing-service
+          predicates:
+            - Path=/housings/**
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
