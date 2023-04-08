@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 public class HousingController {
+
     private final HousingRepository housingRepository;
 
     private final WebClient webClient;
@@ -43,7 +44,7 @@ public class HousingController {
 
         HousingDto housingDto = new HousingDto();
         List<RentalDto> rentals = webClient.get()
-                .uri(String.format("%s/rentals/rental?housingId=%s", gatewayUrl, id))
+                .uri(String.format("%s/rental/api/v1/rentals/rental?housingId=%s", gatewayUrl, id))
                 .retrieve()
                 .bodyToFlux(RentalDto.class)
                 .collectList()

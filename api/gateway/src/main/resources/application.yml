@@ -15,19 +15,41 @@ spring:
         - id: rental-service
           uri: lb://rental-service
           predicates:
-            - Path=/rentals/**
+            - Path=/rental/api/v1/**
+          filters:
+            - RewritePath=/rental/api/v1/(?<segment>.*), /$\{segment}
 
         - id: housing-service
           uri: lb://housing-service
           predicates:
-            - Path=/housings/**
+            - Path=/housing/api/v1/**
+          filters:
+            - RewritePath=/housing/api/v1/(?<segment>.*), /$\{segment}
 
         - id: auth-service
           uri: lb://auth-service
           predicates:
-            - Path=/auth/**
+            - Path=/auth/api/v1/**
+          filters:
+            - RewritePath=/auth/api/v1/(?<segment>.*), /$\{segment}
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
+# Aggregate microservices API swagger docs
+# See the sample config: https://stackoverflow.com/a/74923329
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+    enabled: true
+  swagger-ui:
+    urls:
+      - url: /housing/api/v1/v3/api-docs
+        name: Housing-service
+      - url: /rental/api/v1/v3/api-docs
+        name: Rental-service
+      - url: /auth/api/v1/v3/api-docs
+        name: Auth-service

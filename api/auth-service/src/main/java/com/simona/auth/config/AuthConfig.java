@@ -32,7 +32,7 @@ public class AuthConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().httpBasic().disable().authorizeHttpRequests(authorize -> authorize.antMatchers("/auth/register", "/auth/login", "/auth/validate").permitAll().anyRequest().authenticated());
+        http.csrf().disable().httpBasic().disable().authorizeHttpRequests(authorize -> authorize.antMatchers("/register", "/login", "/validate", "/v3/api-docs").permitAll().anyRequest().authenticated());
         return http.build();
     }
 
