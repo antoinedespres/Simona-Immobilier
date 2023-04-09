@@ -41,10 +41,6 @@ eureka:
 # Aggregate microservices API swagger docs
 # See the sample config: https://stackoverflow.com/a/74923329
 springdoc:
-  api-docs:
-    groups:
-      enabled: true
-    enabled: true
   swagger-ui:
     urls:
       - url: /housing/api/v1/v3/api-docs

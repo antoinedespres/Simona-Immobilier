@@ -21,7 +21,7 @@ Create a database of each service:
 ```bash
 create database "simona-housing-service";
 create database "simona-rental-service";
-create database "simona-account-service"
+create database "simona-account-service";
 ```
 
 type `\l` to show the list of created databases.

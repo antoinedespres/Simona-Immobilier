@@ -24,7 +24,7 @@ public class HousingController {
 
     private final WebClient webClient;
 
-    @Value("${gateway-url}")
+    @Value("${gateway.url}")
     private String gatewayUrl;
 
     HousingController(HousingRepository housingRepository, WebClient webClient) {

@@ -1,5 +1,7 @@
-gateway-url:
-  http://localhost:8080
+
+gateway:
+  host: localhost
+  url: http://${gateway.host}:8080
 
 server:
   port: 8082

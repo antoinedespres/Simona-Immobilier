@@ -1,0 +1,1 @@
+INSERT INTO rental (start_date, end_date, housing_id, tenant_id) VALUES('2023-04-02', '2023-05-02', 1, 1);

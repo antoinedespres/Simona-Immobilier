@@ -1,16 +1,116 @@
 version: '3.8'
 
-# List of containers
 services:
-  client:
-    image: node:16-alpine
-    working_dir: /web
+  service-registry:
+    build: ./api/service-registry
+    image: simona/service-registry
+    container_name: service-registry
     ports:
-      - 3000:3000
+      - '8761:8761'
+    # healthcheck:
+    #   # Check whether the server is UP
+    #   test: ['CMD', 'curl', '--fail', 'http://service-registry:8761/']
+    #   interval: 5s
+    #   timeout: 5s
+    #   retries: 3
+
+  gateway:
+    build: ./api/gateway
+    image: simona/gateway
+    container_name: gateway
+    ports:
+      - '8080:8080'
     environment:
-      REACT_APP_API_URL: http://localhost:4000/api
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+    depends_on:
+      service-registry:
+        #condition: service_healthy
+        condition: service_started
+
+  auth-service:
+    build: ./api/auth-service
+    image: simona/auth-service
+    container_name: auth-service
+    ports:
+      - 8081
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simona_account_service
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+    depends_on:
+      service-registry:
+        #condition: service_healthy
+        condition: service_started
+      db:
+        condition: service_healthy
+
+  housing-service:
+    build: ./api/housing-service
+    image: simona/housing-service
+    container_name: housing-service
+    ports:
+      - 8082
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simona_housing_service
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      # Container name
+      GATEWAY_HOST: gateway
+    depends_on:
+      service-registry:
+        #condition: service_healthy
+        condition: service_started
+      db:
+        condition: service_healthy
+
+  rental-service:
+    build: ./api/rental-service
+    image: simona/rental-service
+    container_name: rental-service
+    ports:
+      - 8083
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simona_rental_service
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+    depends_on:
+      service-registry:
+        #condition: service_healthy
+        condition: service_started
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres
+    container_name: db
+    # Always restart the container if it stops
+    restart: always
+    ports:
+      - 5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
-      # Mount the current directory 'client' to /client inside the container
-      # This allows us to modify the code on the fly, without having to rebuild the image.
-      - ./web/:/web
-    command: sh -c "npm install && npm start"
+      - db-data:/var/lib/postgresql/data
+      - ./postgresql/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+
+  # client:
+  #   image: node:16-alpine
+  #   working_dir: /web
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     REACT_APP_API_URL: http://localhost:4000/api
+  #   volumes:
+  #     # Mount the current directory 'client' to /client inside the container
+  #     # This allows us to modify the code on the fly, without having to rebuild the image.
+  #     - ./web/:/web
+  #   command: sh -c "npm install && npm start"
+
+volumes:
+  db-data:
