@@ -18,6 +18,19 @@ public class HousingDto {
     private long typeId;
     List<RentalDto> rentals;
 
+    public HousingDto (Housing foundHousing, List<RentalDto> rentals) {
+        this.setId(foundHousing.getId());
+        this.setSurface(foundHousing.getSurface());
+        this.setNbRooms(foundHousing.getNbRooms());
+        this.setStreet(foundHousing.getStreet());
+        this.setPostalCode(foundHousing.getPostalCode());
+        this.setCity(foundHousing.getCity());
+        this.setPrice(foundHousing.getPrice());
+        this.setLandlordId(foundHousing.getLandlordId());
+        this.setTypeId(foundHousing.getTypeId());
+        this.setRentals(rentals);
+    }
+
     public long getId() {
         return id;
     }
@@ -98,19 +111,4 @@ public class HousingDto {
         this.rentals = rentals;
     }
 
-
-    public HousingDto toDto(Housing foundHousing, List<RentalDto> rentals) {
-        HousingDto housingDto = new HousingDto();
-        housingDto.setId(foundHousing.getId());
-        housingDto.setSurface(foundHousing.getSurface());
-        housingDto.setNbRooms(foundHousing.getNbRooms());
-        housingDto.setStreet(foundHousing.getStreet());
-        housingDto.setPostalCode(foundHousing.getPostalCode());
-        housingDto.setCity(foundHousing.getCity());
-        housingDto.setPrice(foundHousing.getPrice());
-        housingDto.setLandlordId(foundHousing.getLandlordId());
-        housingDto.setTypeId(foundHousing.getTypeId());
-        housingDto.setRentals(rentals);
-        return housingDto;
-    }
 }

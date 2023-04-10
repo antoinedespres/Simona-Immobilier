@@ -17,6 +17,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RestController
 public class RentalController {
@@ -41,7 +42,7 @@ public class RentalController {
 
     @Operation(summary = "Find rentals by housing id")
     @GetMapping("/rentals/housing/{housingId}")
-    public ResponseEntity<ApiResponse<Page<RentalDto>>> findByHousingId(@RequestParam Long housingId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
+    public ResponseEntity<ApiResponse<List<RentalDto>>> findByHousingId(@PathVariable Long housingId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
                                                         @RequestParam(defaultValue = "id") String sortBy) {
         if (housingId == null || housingId <= 0)
             return ResponseEntity.badRequest().body(new ApiResponse<>(null, "Id must be positive."));
@@ -51,10 +52,12 @@ public class RentalController {
         if (result.isEmpty())
             return ResponseEntity.notFound().build();
 
-        // Convert Page<Rental> to Page<RentalDto>
-        Page<RentalDto> rentalDtoPage = result.get().map(RentalDto::new);
+        // Convert Page<Rental> to List<Rental>
+        List<Rental> rentalList = result.get().getContent();
+        // Convert List<Rental> to List<RentalDto>
+        List<RentalDto> rentals = rentalList.stream().map(RentalDto::new).collect(Collectors.toList());
 
-        return ResponseEntity.ok(new ApiResponse<>(rentalDtoPage, null));
+        return ResponseEntity.ok(new ApiResponse<>(rentals, null));
     }
 
     @Operation(summary = "Find rental by id")

@@ -1,5 +1,6 @@
 package com.simona.housing.web.controller;
 
+import com.simona.housing.client.RentalClient;
 import com.simona.housing.dto.HousingDto;
 import com.simona.housing.dto.RentalDto;
 import com.simona.housing.dto.ApiResponse;
@@ -25,14 +26,16 @@ import java.util.Optional;
 public class HousingController {
 
     private final HousingRepository housingRepository;
+    private final RentalClient rentalClient;
 
     private final WebClient webClient;
 
     @Value("${gateway.url}")
     private String gatewayUrl;
 
-    HousingController(HousingRepository housingRepository, WebClient webClient) {
+    HousingController(HousingRepository housingRepository, RentalClient rentalClient, WebClient webClient) {
         this.housingRepository = housingRepository;
+        this.rentalClient = rentalClient;
         this.webClient = webClient;
     }
 
@@ -53,15 +56,9 @@ public class HousingController {
         if (foundHousing.isEmpty())
             return ResponseEntity.notFound().build();
 
-        HousingDto housingDto = new HousingDto();
-        List<RentalDto> rentals = webClient.get()
-                .uri(String.format("%s/rental/api/v1/rentals/rental?housingId=%s", gatewayUrl, id))
-                .retrieve()
-                .bodyToFlux(RentalDto.class)
-                .collectList()
-                .block();
+        ApiResponse<List<RentalDto>> rentalResponse = rentalClient.getRentalsByHousingId(id, 0, 20, "id");
 
-        return ResponseEntity.ok(new ApiResponse<>(housingDto.toDto(foundHousing.get(), rentals), ""));
+        return ResponseEntity.ok(new ApiResponse<>(new HousingDto(foundHousing.get(), rentalResponse.getData()), ""));
     }
 
     @Operation(summary = "Save a new housing")
@@ -81,7 +78,7 @@ public class HousingController {
                 .buildAndExpand(result.getId())
                 .toUri();
 
-        return ResponseEntity.created(location).body(new ApiResponse<>(new HousingDto().toDto(result, null), "" ));
+        return ResponseEntity.created(location).body(new ApiResponse<>(new HousingDto(result, null), "" ));
     }
 
     @Operation(summary = "Update an existing housing")
@@ -95,7 +92,7 @@ public class HousingController {
         if (existHousing) {
             newHousing.setId(id);
             Housing updatedHousing = housingRepository.save(newHousing);
-            return ResponseEntity.ok(new ApiResponse<>(new HousingDto().toDto(updatedHousing, null), "" ));
+            return ResponseEntity.ok(new ApiResponse<>(new HousingDto(updatedHousing, null), "" ));
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -110,7 +107,7 @@ public class HousingController {
         Optional<Housing> existingHousing = housingRepository.findById(id);
         if (existingHousing.isPresent()) {
             housingRepository.deleteById(id);
-            return ResponseEntity.ok(new ApiResponse<>(new HousingDto().toDto(existingHousing.get(), null), ""));
+            return ResponseEntity.ok(new ApiResponse<>(new HousingDto(existingHousing.get(), null), ""));
         } else {
             return ResponseEntity.notFound().build();
         }

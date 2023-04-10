@@ -1,12 +1,19 @@
 package com.simona.housing.dto;
 
-public class ApiResponse<T> {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
+
+public class ApiResponse<T> implements Serializable {
     private T data;
     private String message;
 
+    // Allow Jackson to create a JSON response using this class
+    public ApiResponse() {
+    }
 
     public ApiResponse(T data, String message) {
-        this.message = message;
+        this.message = message  ;
         this.data = data;
     }
 
@@ -18,7 +25,7 @@ public class ApiResponse<T> {
         this.message = message;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
