@@ -1,23 +1,20 @@
-package com.simona.rental.model;
+package com.simona.rental.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.simona.rental.model.Rental;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-public class Rental {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
+public class RentalDto {
     private long id;
     private LocalDate startDate;
     private LocalDate endDate;
-
-    private long housingId;
     private long tenantId;
 
-    public Rental() {
+    public RentalDto(Rental rental) {
+        this.id = rental.getId();
+        this.startDate = rental.getStartDate();
+        this.endDate = rental.getEndDate();
+        this.tenantId = rental.getTenantId();
     }
 
     public long getId() {
@@ -44,14 +41,6 @@ public class Rental {
         this.endDate = endDate;
     }
 
-    public long getHousingId() {
-        return housingId;
-    }
-
-    public void setHousingId(long housingId) {
-        this.housingId = housingId;
-    }
-
     public long getTenantId() {
         return tenantId;
     }
@@ -59,4 +48,5 @@ public class Rental {
     public void setTenantId(long tenantId) {
         this.tenantId = tenantId;
     }
+
 }

@@ -1,7 +1,10 @@
 package com.simona.rental.web.controller;
 
+import com.simona.rental.dto.ApiResponse;
+import com.simona.rental.dto.RentalDto;
 import com.simona.rental.model.Rental;
 import com.simona.rental.web.repository.RentalRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 @RestController
 public class RentalController {
@@ -22,25 +26,56 @@ public class RentalController {
         this.rentalRepository = rentalRepository;
     }
 
+    @Operation(summary = "Find all rentals")
     @GetMapping("/rentals")
-    public Page<Rental> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
-                                @RequestParam(defaultValue = "id") String sortBy) {
+    public ApiResponse<Page<RentalDto>> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
+                                               @RequestParam(defaultValue = "id") String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-            return rentalRepository.findAll(pageable);
+        Page<Rental> result = rentalRepository.findAll(pageable);
+
+        // Convert Page<Rental> to Page<RentalDto>
+        Page<RentalDto> rentalDtoPage = result.map(RentalDto::new);
+
+        return new ApiResponse<>(rentalDtoPage, null);
     }
 
-    @GetMapping("/rentals/rental")
-    public List<Rental> findByHousingId(@RequestParam long housingId) {
-        return rentalRepository.findByHousingId(housingId);
+    @Operation(summary = "Find rentals by housing id")
+    @GetMapping("/rentals/housing/{housingId}")
+    public ResponseEntity<ApiResponse<Page<RentalDto>>> findByHousingId(@RequestParam Long housingId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
+                                                        @RequestParam(defaultValue = "id") String sortBy) {
+        if (housingId == null || housingId <= 0)
+            return ResponseEntity.badRequest().body(new ApiResponse<>(null, "Id must be positive."));
+
+        Optional<Page<Rental>> result = rentalRepository.findByHousingId(housingId, PageRequest.of(page, size, Sort.by(sortBy)));
+
+        if (result.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        // Convert Page<Rental> to Page<RentalDto>
+        Page<RentalDto> rentalDtoPage = result.get().map(RentalDto::new);
+
+        return ResponseEntity.ok(new ApiResponse<>(rentalDtoPage, null));
     }
 
+    @Operation(summary = "Find rental by id")
     @GetMapping("/rentals/{id}")
-    public Rental findById(@PathVariable long id) {
-        return rentalRepository.findById(id);
+    public ResponseEntity<ApiResponse<RentalDto>> findById(@PathVariable Long id) {
+        if (id == null || id <= 0)
+            return ResponseEntity.badRequest().body(new ApiResponse<>(null, "Id must be positive."));
+
+        Optional<Rental> foundRental = rentalRepository.findById(id);
+        if (foundRental.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(new ApiResponse<>(new RentalDto(foundRental.get()), ""));
     }
 
+    @Operation(summary = "Save a new rental")
     @PostMapping("/rentals")
-    public ResponseEntity<Rental> save(@RequestBody Rental rental) {
+    public ResponseEntity<ApiResponse<RentalDto>> save(@RequestBody Rental rental) {
+        if (rental == null)
+            return ResponseEntity.badRequest().body(new ApiResponse<>(null, "Body is required"));
+
         Rental result = rentalRepository.save(rental);
 
         if (result == null)
@@ -51,28 +86,37 @@ public class RentalController {
                 .path("/{id}")
                 .buildAndExpand(result.getId())
                 .toUri();
-        return ResponseEntity.created(location).body(result);
+
+        return ResponseEntity.created(location).body(new ApiResponse<>(new RentalDto(result), null));
     }
 
-    @PutMapping("/rentals/{id}")
-    public ResponseEntity<Rental> update(
+    @Operation(summary = "Update an existing rental")
+    @PutMapping("/housings/{id}")
+    public ResponseEntity<ApiResponse<RentalDto>> update(
             @PathVariable Long id, @RequestBody Rental newRental) {
+        if (id == null || id <= 0)
+            return ResponseEntity.badRequest().body(new ApiResponse<>(null, "Id must be positive."));
+
         boolean existRental = rentalRepository.existsById(id);
         if (existRental) {
             newRental.setId(id);
-            Rental updatedRental = rentalRepository.save(newRental);
-            return ResponseEntity.ok(updatedRental);
+            Rental updatedHousing = rentalRepository.save(newRental);
+            return ResponseEntity.ok(new ApiResponse<>(new RentalDto(updatedHousing), null));
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
+    @Operation(summary = "Delete a rental by id")
     @DeleteMapping("rentals/{id}")
-    public ResponseEntity<Rental> delete(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<RentalDto>> delete(@PathVariable Long id) {
+        if (id == null || id <= 0)
+            return ResponseEntity.badRequest().body(new ApiResponse<>(null, "Id must be positive."));
+
         Optional<Rental> existingRental = rentalRepository.findById(id);
         if (existingRental.isPresent()) {
             rentalRepository.deleteById(id);
-            return ResponseEntity.ok(existingRental.get());
+            return ResponseEntity.ok(new ApiResponse<>(new RentalDto(existingRental.get()), null));
         } else {
             return ResponseEntity.notFound().build();
         }

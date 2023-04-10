@@ -1,6 +1,7 @@
 package com.simona.housing.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.simona.housing.model.Housing;
 
 import java.util.List;
