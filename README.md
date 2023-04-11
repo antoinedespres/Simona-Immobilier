@@ -37,3 +37,7 @@ create database simona_account_service;
 ```
 
 type `\l` to show the list of created databases.
+
+## Resources
+
+(Microservices Security Using JWT - Spring Cloud Gateway - JavaTechie)[https://www.youtube.com/watch?v=MWvnmyLRUik]
