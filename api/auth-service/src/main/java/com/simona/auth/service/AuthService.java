@@ -21,6 +21,9 @@ public class AuthService {
     }
 
     public Account saveAccount(Account credential) {
+        if (accountRepository.findByEmail(credential.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists");
+        }
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
         return accountRepository.save(credential);
     }

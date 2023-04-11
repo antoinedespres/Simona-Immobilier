@@ -94,7 +94,7 @@ public class RentalController {
     }
 
     @Operation(summary = "Update an existing rental")
-    @PutMapping("/housings/{id}")
+    @PutMapping("/rentals/{id}")
     public ResponseEntity<ApiResponse<RentalDto>> update(
             @PathVariable Long id, @RequestBody Rental newRental) {
         if (id == null || id <= 0)
@@ -105,21 +105,6 @@ public class RentalController {
             newRental.setId(id);
             Rental updatedHousing = rentalRepository.save(newRental);
             return ResponseEntity.ok(new ApiResponse<>(new RentalDto(updatedHousing), null));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @Operation(summary = "Delete a rental by id")
-    @DeleteMapping("rentals/{id}")
-    public ResponseEntity<ApiResponse<RentalDto>> delete(@PathVariable Long id) {
-        if (id == null || id <= 0)
-            return ResponseEntity.badRequest().body(new ApiResponse<>(null, "Id must be positive."));
-
-        Optional<Rental> existingRental = rentalRepository.findById(id);
-        if (existingRental.isPresent()) {
-            rentalRepository.deleteById(id);
-            return ResponseEntity.ok(new ApiResponse<>(new RentalDto(existingRental.get()), null));
         } else {
             return ResponseEntity.notFound().build();
         }

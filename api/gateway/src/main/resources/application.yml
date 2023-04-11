@@ -1,6 +1,9 @@
 server:
   port: 8080
 
+jwt:
+  secret: hellodarknessmyoldfriendhellodarknessmyoldfriend
+
 spring:
   config:
     import: "optional:configserver:"
@@ -17,6 +20,7 @@ spring:
           predicates:
             - Path=/rental/api/v1/**
           filters:
+            - AuthFilter
             - RewritePath=/rental/api/v1/(?<segment>.*), /$\{segment}
 
         - id: housing-service
@@ -24,6 +28,7 @@ spring:
           predicates:
             - Path=/housing/api/v1/**
           filters:
+            - AuthFilter
             - RewritePath=/housing/api/v1/(?<segment>.*), /$\{segment}
 
         - id: auth-service

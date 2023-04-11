@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -48,7 +49,7 @@ public class HousingController {
 
     @Operation(summary = "Find housing by id")
     @GetMapping("/housings/{id}")
-    public ResponseEntity<ApiResponse<HousingDto>> findById(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<HousingDto>> findById(@PathVariable Long id, @RequestHeader(required = false, value = HttpHeaders.AUTHORIZATION) String authorization) {
         if (id == null || id <= 0)
             return ResponseEntity.badRequest().body(new ApiResponse<>(null, "Id is required"));
 
@@ -56,7 +57,7 @@ public class HousingController {
         if (foundHousing.isEmpty())
             return ResponseEntity.notFound().build();
 
-        ApiResponse<List<RentalDto>> rentalResponse = rentalClient.getRentalsByHousingId(id, 0, 20, "id");
+        ApiResponse<List<RentalDto>> rentalResponse = rentalClient.getRentalsByHousingId(authorization, id, 0, 20, "id");
 
         return ResponseEntity.ok(new ApiResponse<>(new HousingDto(foundHousing.get(), rentalResponse.getData()), ""));
     }
@@ -93,21 +94,6 @@ public class HousingController {
             newHousing.setId(id);
             Housing updatedHousing = housingRepository.save(newHousing);
             return ResponseEntity.ok(new ApiResponse<>(new HousingDto(updatedHousing, null), "" ));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @Operation(summary = "Delete a housing by id")
-    @DeleteMapping("housings/{id}")
-    public ResponseEntity<ApiResponse<HousingDto>> delete(@PathVariable Long id) {
-        if (id == null || id <= 0)
-            return ResponseEntity.badRequest().body(new ApiResponse<>(null, "Id is required"));
-
-        Optional<Housing> existingHousing = housingRepository.findById(id);
-        if (existingHousing.isPresent()) {
-            housingRepository.deleteById(id);
-            return ResponseEntity.ok(new ApiResponse<>(new HousingDto(existingHousing.get(), null), ""));
         } else {
             return ResponseEntity.notFound().build();
         }

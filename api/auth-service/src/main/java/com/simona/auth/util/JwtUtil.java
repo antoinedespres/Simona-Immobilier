@@ -68,4 +68,7 @@ public class JwtUtil {
     public String getSubject(String token) {
         return getClaims(token).getSubject();
     }
+
+    // code to get the token from the request header
+
 }

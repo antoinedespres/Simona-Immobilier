@@ -7,6 +7,7 @@ public class RentalDto {
     private LocalDate startDate;
     private LocalDate endDate;
     private long tenantId;
+    private long housingId;
 
     public long getId() {
         return id;
@@ -38,5 +39,13 @@ public class RentalDto {
 
     public void setTenantId(long tenantId) {
         this.tenantId = tenantId;
+    }
+
+    public long getHousingId() {
+        return housingId;
+    }
+
+    public void setHousingId(long housingId) {
+        this.housingId = housingId;
     }
 }

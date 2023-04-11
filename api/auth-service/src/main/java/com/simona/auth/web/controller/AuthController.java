@@ -26,12 +26,17 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody Account account) {
-        Account savedAccount = authService.saveAccount(account);
-        AuthResponse response = new AuthResponse();
-        response.setEmail(savedAccount.getEmail());
-        response.setLastName(savedAccount.getLastName());
-        response.setFirstName(savedAccount.getFirstName());
-        return ResponseEntity.ok(response);
+
+        try {
+            Account savedAccount = authService.saveAccount(account);
+            AuthResponse response = new AuthResponse();
+            response.setEmail(savedAccount.getEmail());
+            response.setLastName(savedAccount.getLastName());
+            response.setFirstName(savedAccount.getFirstName());
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping("/login")

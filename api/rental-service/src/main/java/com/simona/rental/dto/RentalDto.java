@@ -9,12 +9,14 @@ public class RentalDto {
     private LocalDate startDate;
     private LocalDate endDate;
     private long tenantId;
+    private long housingId;
 
     public RentalDto(Rental rental) {
         this.id = rental.getId();
         this.startDate = rental.getStartDate();
         this.endDate = rental.getEndDate();
         this.tenantId = rental.getTenantId();
+        this.housingId = rental.getHousingId();
     }
 
     public long getId() {
@@ -49,4 +51,11 @@ public class RentalDto {
         this.tenantId = tenantId;
     }
 
+    public long getHousingId() {
+        return housingId;
+    }
+
+    public void setHousingId(long housingId) {
+        this.housingId = housingId;
+    }
 }
