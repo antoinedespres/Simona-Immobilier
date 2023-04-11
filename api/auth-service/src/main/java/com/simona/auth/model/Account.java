@@ -12,6 +12,7 @@ import javax.validation.constraints.Email;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
     private String lastName;
     private String firstName;
