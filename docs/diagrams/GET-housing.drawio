@@ -1,0 +1,194 @@
+<mxfile host="65bd71144e">
+    <diagram name="Page-1" id="S0qWBEfTinxwVEII3tIF">
+        <mxGraphModel dx="1179" dy="691" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#374151;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;shadow=1;" parent="1" source="MyjZQWcwXhGRPd_88m82-1" target="MyjZQWcwXhGRPd_88m82-5" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="480" y="300" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" style="edgeStyle=none;html=1;entryX=0.65;entryY=-0.005;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;exitX=0.653;exitY=1.004;exitDx=0;exitDy=0;exitPerimeter=0;entryPerimeter=0;fontFamily=Comic Sans MS;shadow=1;" edge="1" parent="1" source="MyjZQWcwXhGRPd_88m82-1" target="MyjZQWcwXhGRPd_88m82-9">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" style="edgeStyle=none;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;exitX=0.304;exitY=0.019;exitDx=0;exitDy=0;exitPerimeter=0;fontFamily=Comic Sans MS;shadow=1;" edge="1" parent="1" source="MyjZQWcwXhGRPd_88m82-1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="323" y="200" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="18" style="edgeStyle=none;html=1;startArrow=classic;startFill=1;endArrow=none;endFill=0;exitX=0.645;exitY=0.006;exitDx=0;exitDy=0;exitPerimeter=0;fontFamily=Comic Sans MS;shadow=1;" edge="1" parent="1" source="MyjZQWcwXhGRPd_88m82-1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="200" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="36" style="edgeStyle=none;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=6;startArrow=none;startFill=0;endArrow=classic;endFill=1;shadow=1;" edge="1" parent="1" source="MyjZQWcwXhGRPd_88m82-1" target="MyjZQWcwXhGRPd_88m82-23">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-1" value="API Gateway" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#374151;glass=0;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="280" width="110" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-4" value="/housing/api/v1/housings/1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;shadow=0;" parent="1" vertex="1">
+                    <mxGeometry x="381" y="230" width="150" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-21" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.988;entryY=0.682;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;strokeColor=#374151;fontFamily=Comic Sans MS;fontSize=12;fontColor=#374151;endArrow=classic;exitX=-0.018;exitY=0.674;exitDx=0;exitDy=0;exitPerimeter=0;shadow=1;" parent="1" source="MyjZQWcwXhGRPd_88m82-5" target="MyjZQWcwXhGRPd_88m82-1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-5" value="&lt;div&gt;Auth service&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fillColor=#FAFAFA;fontColor=#374151;strokeColor=#d1d5db;gradientColor=none;shadow=1;glass=0;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="280" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=none;html=1;entryX=0.296;entryY=0.999;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;exitX=0.3;exitY=0.016;exitDx=0;exitDy=0;entryPerimeter=0;exitPerimeter=0;fontFamily=Comic Sans MS;shadow=1;" edge="1" parent="1" source="MyjZQWcwXhGRPd_88m82-9" target="MyjZQWcwXhGRPd_88m82-1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" style="edgeStyle=none;html=1;fontFamily=Comic Sans MS;fontSize=6;startArrow=none;startFill=0;endArrow=classic;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;shadow=1;" edge="1" parent="1" source="MyjZQWcwXhGRPd_88m82-9" target="MyjZQWcwXhGRPd_88m82-1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="150.0000000000001" y="470" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="200" y="515"/>
+                            <mxPoint x="200" y="420"/>
+                            <mxPoint x="200" y="320"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-9" value="Housing service" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fillColor=#FAFAFA;fontColor=#374151;strokeColor=#d1d5db;gradientColor=none;shadow=1;glass=0;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="480" width="110" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-14" value="&lt;div style=&quot;font-size: 10px;&quot;&gt;/validate&lt;br style=&quot;font-size: 10px;&quot;&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;shadow=0;" parent="1" vertex="1">
+                    <mxGeometry x="441" y="265" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-16" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;rounded=1;shadow=1;glass=0;fontFamily=Comic Sans MS;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="150" width="42.5" height="42.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-22" value="Token is valid" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;shadow=0;" parent="1" vertex="1">
+                    <mxGeometry x="441" y="305" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" style="edgeStyle=none;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;fontFamily=Comic Sans MS;shadow=1;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="560" y="512.5" as="sourcePoint"/>
+                        <mxPoint x="400" y="512.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-23" value="Rental sevice" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fillColor=#FAFAFA;fontColor=#374151;strokeColor=#d1d5db;gradientColor=none;shadow=1;glass=0;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="480" width="120" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-25" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=1;glass=0;fontSize=12;fillColor=#f8cecc;" parent="1" vertex="1">
+                    <mxGeometry x="371" y="230" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-26" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=1;glass=0;fontSize=12;fillColor=#f8cecc;" parent="1" vertex="1">
+                    <mxGeometry x="421" y="270" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-27" value="5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=1;glass=0;fontSize=12;fillColor=#f8cecc;" parent="1" vertex="1">
+                    <mxGeometry x="371" y="410" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-28" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=1;glass=0;fontSize=12;fillColor=#f8cecc;" parent="1" vertex="1">
+                    <mxGeometry x="421" y="310" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-30" value="6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=1;glass=0;fontSize=12;fillColor=#f8cecc;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="410" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-31" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=0;glass=0;fontSize=12;fillColor=#f8cecc;" parent="1" vertex="1">
+                    <mxGeometry x="62" y="587.5" width="27.5" height="27.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-32" value="Demander les informations de logement ayant l'id '1'" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="97" y="585" width="315" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-33" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=0;glass=0;fontSize=12;fillColor=#f8cecc;" parent="1" vertex="1">
+                    <mxGeometry x="62" y="636" width="27.5" height="27.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-34" value="Vérifier le Json Web Token stocké dans le header 'Authorization'" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="97" y="635" width="313" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-35" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=0;glass=0;fontSize=12;fillColor=#f8cecc;" parent="1" vertex="1">
+                    <mxGeometry x="62" y="686" width="27.5" height="27.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-36" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Demander la validation du token.&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;horizontal=1;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="682.5" width="400" height="42.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-37" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=0;glass=0;fontSize=12;fillColor=#f8cecc;" parent="1" vertex="1">
+                    <mxGeometry x="62" y="733.37" width="27.5" height="27.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-38" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Si le token est invalide, la requête renvoie 401&amp;nbsp;unauthorized.&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Dans le cas contraire, un message de succès est renvoyé.&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="725" width="339" height="44.25" as="geometry"/>
+                </mxCell>
+                <mxCell id="MyjZQWcwXhGRPd_88m82-39" value="Recevoir les informations d'un logement" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=14;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+                    <mxGeometry x="184.5" y="80" width="321" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="/housings/1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;shadow=0;" vertex="1" parent="1">
+                    <mxGeometry x="391" y="410" width="61" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="/rental/api/v1/rentals/housing/1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;shadow=0;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="440" width="140" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="rentals JSON" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;shadow=0;" vertex="1" parent="1">
+                    <mxGeometry x="441" y="490" width="75" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=1;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="421" y="490" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="housing + rentals JSON" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;shadow=0;" vertex="1" parent="1">
+                    <mxGeometry x="209" y="410" width="91" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="housing + rentals JSON" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;shadow=0;" vertex="1" parent="1">
+                    <mxGeometry x="209" y="230" width="91" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=1;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="410" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" style="edgeStyle=none;html=1;startArrow=classic;startFill=1;endArrow=none;endFill=0;fontFamily=Comic Sans MS;shadow=1;" edge="1" parent="1" source="22" target="19">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="10" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=1;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="230" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=1;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="331.25" y="290" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;Le Gateway demande l'information à Housing service.&lt;/div&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;Note :&lt;/b&gt;&amp;nbsp;Gateway a réécrire le chemin&amp;nbsp; '&lt;span style=&quot;border-color: var(--border-color); background-color: initial;&quot;&gt;/housing/api/v1/housings/1' en '/housing/1, car ce dernier est exposé par housing service&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="95" y="784.87" width="325" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=0;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="784.87" width="27.5" height="27.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=0;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="587.5" width="27.5" height="27.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;Demander les locations du logement '1' au Gateway.&lt;/div&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;Note :&lt;/b&gt;&amp;nbsp;Housing service ne communique pas directement avec Rental service afin que Gateway puisse vérifier l'authentification." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="475.25" y="585" width="310" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="rentals/housing/1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;shadow=0;" vertex="1" parent="1">
+                    <mxGeometry x="468.5" y="390" width="140" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" style="edgeStyle=none;html=1;fontFamily=Comic Sans MS;fontSize=6;startArrow=none;startFill=0;endArrow=classic;endFill=1;shadow=1;" edge="1" parent="1" source="39" target="38">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=1;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="468.5" y="390" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;Demander les locations du logement '1'&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="475.25" y="661.43" width="211" height="21.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=0;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="658.43" width="27.5" height="27.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=0;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="705.8" width="27.5" height="27.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;Renvoyer les locations demandées&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="475.25" y="708.81" width="181" height="21.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;Renvoyer les informations du logement ainsi que ses locations&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="475.25" y="760.3" width="301" height="21.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=0;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="757.3" width="27.5" height="27.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;Renvoyer les informations du logement ainsi que ses locations&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontColor=#374151;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="475.25" y="808.3" width="301" height="21.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="10" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Comic Sans MS;spacingBottom=4;spacingRight=2;strokeColor=#b85450;rounded=1;shadow=0;glass=0;fontSize=12;fillColor=#f8cecc;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="808.3" width="27.5" height="27.5" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
