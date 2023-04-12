@@ -13,7 +13,7 @@ Le 11/04/2023
 
 ## Objectif
 
-L'objectif est de créer une application de location de logement basée sur l’architecture des microservices. L'application doit être facile à utiliser et offrir une expérience fluide pour les locataires et les propriétaires.
+L'objectif est de créer une application de location de logement basée sur l’architecture microservices. L'application doit être facile à utiliser et offrir une expérience fluide pour les locataires et les propriétaires.
 
 ## Fonctionnalités implémentées
 
@@ -37,13 +37,13 @@ Vous pouvez visionner toutes les instances de microservice ici: http://localhost
 
 ## Dépendances
 
-| Nom                                                                                  | Description                                                                                                                        |
-| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
-| [Spring Boot 2.7.10](https://spring.io/)                                             | Framework Java qui permet de développer rapidement des applications Web et des microservices.                                      |
-| [Spring Cloud Gateway](https://cloud.spring.io/spring-cloud-gateway/reference/html/) | Une API Gateway qui se construit sur l'écosystème Spring, à savoir Spring 5, Spring boot 2 et Projet Reactor.                      |
-| [Eureka](https://cloud.spring.io/spring-cloud-netflix/reference/html/)               | Bibliothèque mettant en place un registre content toutes les instances de chaque microservice déployé dans des serveurs différents |
-| [Feign](https://github.com/OpenFeign/feign)                                          | Un client REST déclaratif permettant aux microservices de communiquer entre-eux en faisant des requêtes REST                       |
-| [PostgreSQL](https://www.postgresql.org/)                                            | La base de données relationnelle Open Source la plus avancée au monde                                                              |
+| Nom                                                                                  | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------ |--------------------------------------------------------------------------------------------------------------------------------------|
+| [Spring Boot 2.7.10](https://spring.io/)                                             | Framework Java qui permet de développer rapidement des applications Web et des microservices.                                        |
+| [Spring Cloud Gateway](https://cloud.spring.io/spring-cloud-gateway/reference/html/) | Une API Gateway qui se construit sur l'écosystème Spring, à savoir Spring 5, Spring boot 2 et Projet Reactor.                        |
+| [Eureka](https://cloud.spring.io/spring-cloud-netflix/reference/html/)               | Bibliothèque mettant en place un registre contenant toutes les instances de chaque microservice déployé dans des serveurs différents |
+| [Feign](https://github.com/OpenFeign/feign)                                          | Un client REST déclaratif permettant aux microservices de communiquer entre-eux en faisant des requêtes REST                         |
+| [PostgreSQL](https://www.postgresql.org/)                                            | La base de données relationnelle Open Source la plus avancée au monde                                                                |
 
 ## Description des microservices
 
@@ -54,7 +54,7 @@ L'application est découpée en 4 microservices dont 1 API Gateway :
 - Housing service
 - Rental service
 
-Je vais vous détaillé les services un par un dans la partie qui suit.
+Le contenu des sercices sera détaillé dans la partie suivante du présent rapport.
 
 **Notes**
 
@@ -74,9 +74,9 @@ Exemple 2 : se connecter
 
 ### API Gateway
 
-C'est le point d'entrée du système. Il permet d'acheminer les requêtes vers les microservices correspondants. Il peut également faire office de la gestion d'authentification.
+C'est le point d'entrée du système. Il permet d'acheminer les requêtes vers les microservices correspondants. Il peut également jouer le rôle de gestionnaire d'authentification.
 
-Nous avons choisi d'utiliser la bibliothèque [Spring Cloud Gateway](https://cloud.spring.io/spring-cloud-gateway/reference/html/) car elle est présent dans l'écosystème de Spring.
+Nous avons choisi d'utiliser la bibliothèque [Spring Cloud Gateway](https://cloud.spring.io/spring-cloud-gateway/reference/html/) car elle fait partie de l'écosystème de Spring.
 
 La configuration de l'acheminement des routes API se trouve dans `application.yml`:
 
@@ -115,11 +115,11 @@ spring:
 
 `RewritePath` permet de réécrire le chemin. En réalité l'endpoint exposé par Rental service est `localhost:8083/rentals/*`.
 
-Considérons que nous souhaitons recevoir le logement 2 avec l'url du Gateway : `localhost:8080/rental/api/v1/rentals/1`:
+Considérons que nous souhaitons recevoir le logement 2 avec l'url du Gateway : `localhost:8080/rental/api/v1/rentals/1`, on aura alors :
 
 ![gateway rewrite path](./diagrams/gateway-rewrite-path.png)
 
-`Rental-service` expose l'endpoint`localhost:8083/rentals/{id}`. Ce qui implique que Gateway doit faire une requête à ledit endpoint. `RewritePath` indique que Gateway va récupérer le segment `rentals/2` et l'utilise pour fait une requête à Rental service avec l'endpoint `localhost:8083/rentals/2`.
+`Rental-service` expose l'endpoint`localhost:8083/rentals/{id}`. Cela implique que l'API Gateway doit faire une requête à ledit endpoint. `RewritePath` indique que Gateway va récupérer le segment `rentals/2` et l'utilise pour fait une requête à Rental service avec l'endpoint `localhost:8083/rentals/2`.
 
 En réalité, `RewritePath` permet d'ajouter un préfixe afin de **versionner** l'API de Rental service. Nous pouvons très bien laisser l'endpoint `/rentals` sans réécrire le chemin.
 
@@ -139,7 +139,7 @@ Ce service est responsable de la gestion des utilisateurs. Il permet de créer u
 
 Nous avons utilisé [Spring Boot Security](https://docs.spring.io/spring-security/reference/index.html) pour la gestion de l'authentification. Spring Boot Security est un framework qui permet de gérer l'authentification et l'autorisation. Elle est basée sur Spring Security.
 
-Au moment de se connecter avec `/login`, le méthode suivante est exécutée afin de hash le mot de passe et de le stocker :
+Au moment de se connecter avec `/login`, la méthode suivante est exécutée afin de calculer le hash le mot de passe et de le stocker :
 
 ```java
 // AccountService.java
@@ -153,9 +153,9 @@ public Account saveAccount(Account credential) {
 }
 ```
 
-La méthode utilise `passwordEncoder` qui est une instance de `BCryptPasswordEncoder` pour hash le mot de passe.
+La méthode utilise `passwordEncoder` qui est une instance de `BCryptPasswordEncoder` pour calculer le hash du mot de passe.
 
-`BCryptPasswordEncoder` est une implémentation de l'algorithme de hash [BCrypt.](https://fr.wikipedia.org/wiki/Bcrypt)
+`BCryptPasswordEncoder` est une implémentation de l'algorithme de hash [BCrypt](https://fr.wikipedia.org/wiki/Bcrypt).
 
 ### Housing service
 
@@ -169,7 +169,7 @@ Ce service est responsable de la gestion des locations. Il permet de créer une 
 
 Feign est un client REST déclaratif. Il permet d'écrire des requêtes REST en utilisant des interfaces Java.
 
-Reprenons l'exemple de la lecture d'un logement vu dans la partie [précédente](#vue-densemble-des-interactions-entre-les-microservices).
+Reprenons l'exemple de la lecture d'un logement vue dans la partie [précédente](#vue-densemble-des-interactions-entre-les-microservices).
 
 Afin d'appeler le rental service depuis le housing service, nous avons créé une interface `RentalServiceClient` dans le housing service:
 
@@ -207,13 +207,13 @@ public ResponseEntity<ApiResponse<HousingDto>> findById(@PathVariable Long id, @
 
 ## Gestion de l'authentification
 
-Afin de sécuriser notre API, nous utilisons JSON Web Token (JWT), un standard ouvert ([RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)) qui définit que l'échange d'informations entre deux parties peut être sécurisé et vérifié grâce à un token ayant une date d'expiration.
+Afin de sécuriser notre API, nous utilisons JSON Web Token (JWT), un standard ouvert ([RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)) qui définit que l'échange d'informations entre deux parties peut être sécurisé et vérifié grâce à un jeton (*token*) ayant une date d'expiration.
 
 Nous avons utilisé la bibliothèque Maven [JJWT API](https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api).
 
 ### 1. Génération du token dans Auth service
 
-Nous avons créer une classe `JwtUtil` qui permet de générer un token JWT:
+Nous avons créé une classe `JwtUtil` qui permet de générer un token JWT:
 
 ```java
 // JwtUtil.java
@@ -238,7 +238,7 @@ public class JwtUtil {
 }
 ```
 
-JWT est généré avec l'algorithme signature HMAC SHA-256. Il est signé avec la clé secrète `secret` que l'on lit dans le fichier `application.yml` avec l'annotation `@Value` :
+JWT est généré avec l'algorithme de signature HMAC SHA-256. Il est signé avec la clé secrète `secret` que l'on lit dans le fichier `application.yml` avec l'annotation `@Value` :
 
 ```yml
 jwt:
@@ -312,7 +312,7 @@ public class JwtUtil {
 
 `getClaims()` permet de récupérer les claims du token et d'y extraire la date d'expiration.
 
-`isValidToken()` vérifie que la date d'expiration n'est pas encore passé, c'est-à-dire supérieure à la date actuelle. Le cas échéant, le token est invalide.
+`isValidToken()` vérifie que la date d'expiration n'est pas encore passée, c'est-à-dire supérieure à la date actuelle. Le cas échéant, le token est invalide.
 
 Ensuite, nous appelons `isValidToken()` dans le filtre `JwtFilter`:
 
@@ -367,15 +367,15 @@ Si le token est valide, nous appelons la méthode `chain.filter(exchange)` pour 
 return chain.filter(exchange);
 ```
 
-## Gestion de déploiement
+## Gestion du déploiement
 
 Docker est un logiciel libre qui permet de créer, déployer et exécuter des applications dans des conteneurs logiciels.
 
 Nous avons utilisé Docker d'afin de nous épargner de l'installation de JDK Java, Maven, PostgreSQL et autres dépendances sur le serveur.
 
-Nous avons créer une image pour chaque service qui build le projet et le packager dans un fichier jar.
+Nous avons créé une image pour chaque service qui build le projet et le packager dans un fichier jar.
 
-Exemple de `Dockerfile` de Auth service:
+Exemple de `Dockerfile` de Auth service :
 
 ```dockerfile
 FROM maven:3.8.3-jdk-11-slim
