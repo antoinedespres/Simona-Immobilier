@@ -20,7 +20,7 @@ spring:
           predicates:
             - Path=/rental/api/v1/**
           filters:
-            - AuthFilter
+            - JwtFilter
             - RewritePath=/rental/api/v1/(?<segment>.*), /$\{segment}
 
         - id: housing-service
@@ -28,7 +28,7 @@ spring:
           predicates:
             - Path=/housing/api/v1/**
           filters:
-            - AuthFilter
+            - JwtFilter
             - RewritePath=/housing/api/v1/(?<segment>.*), /$\{segment}
 
         - id: auth-service

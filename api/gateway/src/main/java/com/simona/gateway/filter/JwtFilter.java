@@ -9,12 +9,12 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> {
+public class JwtFilter extends AbstractGatewayFilterFactory<JwtFilter.Config> {
 
     private final JwtUtil jwtUtil;
     private final RouteValidator routeValidator;
 
-    public AuthFilter(JwtUtil jwtUtil, RouteValidator routeValidator) {
+    public JwtFilter(JwtUtil jwtUtil, RouteValidator routeValidator) {
         super(Config.class);
         this.jwtUtil = jwtUtil;
         this.routeValidator = routeValidator;
