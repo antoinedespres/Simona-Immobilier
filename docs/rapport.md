@@ -19,7 +19,7 @@ L'objectif est de créer une application de location de logement basée sur l’
 
 - opérations CRUD sur les logements
 - opérations CRUD sur les locations
-- l'authentification par Json Web Token (JWT)
+- l'authentification par JSON Web Token (JWT)
 - documentation Swagger
 - déploiement par Docker
 
@@ -37,17 +37,17 @@ Vous pouvez visionner toutes les instances de microservice ici: http://localhost
 
 ## Dépendances
 
-| Nom                                                                                  | Description                                                                                                          |
-| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| Spring Boot 2.7.10                                                                   | Framework Java qui permet de développer rapidement des applications Web et des microservices.                        |
-| [Spring Cloud Gateway](https://cloud.spring.io/spring-cloud-gateway/reference/html/) | Une API Gateway qui se construit sur l'écosystème Spring, à savoir Spring 5, Spring boot 2 et Projet Reactor.        |
-| Eureka                                                                               | mettre en place un registre content toutes les instances de chaque microservice déployé dans des serveurs différents |
-| Feign                                                                                | permet aux microservices de communiquer entre-eux en faisant des requêtes REST                                       |
-| PostgreSQL                                                                           | base de données SQL                                                                                                  |
+| Nom                                                                                  | Description                                                                                                                        |
+| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| [Spring Boot 2.7.10](https://spring.io/)                                             | Framework Java qui permet de développer rapidement des applications Web et des microservices.                                      |
+| [Spring Cloud Gateway](https://cloud.spring.io/spring-cloud-gateway/reference/html/) | Une API Gateway qui se construit sur l'écosystème Spring, à savoir Spring 5, Spring boot 2 et Projet Reactor.                      |
+| [Eureka](https://cloud.spring.io/spring-cloud-netflix/reference/html/)               | Bibliothèque mettant en place un registre content toutes les instances de chaque microservice déployé dans des serveurs différents |
+| [Feign](https://github.com/OpenFeign/feign)                                          | Un client REST déclaratif permettant aux microservices de communiquer entre-eux en faisant des requêtes REST                       |
+| [PostgreSQL](https://www.postgresql.org/)                                            | La base de données relationnelle Open Source la plus avancée au monde                                                              |
 
 ## Description des microservices
 
-L'application est découpé en 4 microservices dont 1 API Gateway :
+L'application est découpée en 4 microservices dont 1 API Gateway :
 
 - API Gateway
 - Auth service
@@ -60,17 +60,21 @@ Je vais vous détaillé les services un par un dans la partie qui suit.
 
 - Chaque service a sa propre base de données PostgreSQL respective : `simona_account_service`, `simona_housing_service`, `simona_rental_service`.
 
-- Chaque service communique à l'aide de la bibliothèque Feign, un client REST déclaratif.
+- Chaque service communique à l'aide de Feign.
 
-## Vue d'ensemble d'interaction entre les microservices
+## Vue d'ensemble des interactions entre les microservices
 
-Exemple : recevoir les informations d'un logement.
+Exemple 1 : recevoir les informations d'un logement.
 
-![Interaction entre les microservices](./diagrams/GET-housing-information.png)
+![Recevoir les informations d'un logement](./diagrams/get-housing-flow-diagram.png)
+
+Exemple 2 : se connecter
+
+![Se connecter](./diagrams/login-flow-diagram.png)
 
 ### API Gateway
 
-C'est le point d'entrée du système. Il permet de diriger les requêtes vers les microservices correspondants. Il peut également faire office de la gestion d'authentification.
+C'est le point d'entrée du système. Il permet d'acheminer les requêtes vers les microservices correspondants. Il peut également faire office de la gestion d'authentification.
 
 Nous avons choisi d'utiliser la bibliothèque [Spring Cloud Gateway](https://cloud.spring.io/spring-cloud-gateway/reference/html/) car elle est présent dans l'écosystème de Spring.
 
@@ -95,7 +99,7 @@ spring:
           predicates:
             - Path=/rental/api/v1/**
           filters:
-            - AuthFilter
+            - JwtFilter
             - RewritePath=/rental/api/v1/(?<segment>.*), /$\{segment}
 ```
 
@@ -107,17 +111,17 @@ spring:
 
 `routes.predicates`: un prédicat permet de tester si une requête vérifie une condition. `Path` indique que le chemin de la requête doit commencer par `/rental/api/v1`. Concrètement, lorsqu'on fait une requête à l'url `/rental/api/v1`, le Gateway va acheminer la requête vers le service de location.
 
-`routes.filter`: un filtre permet de faire des modifications sur la requête. `AuthFilter` est un filtre d'authentification. Il va vérifier s'il y a la présence d'un token dans l'en-tête `Authorization`.
+`routes.filter`: un filtre permet de faire des modifications sur la requête. `JwtFilter` est un filtre d'authentification. Il va vérifier la présence d'un token dans l'en-tête `Authorization`.
 
-`RewritePath` permet de réécrire le chemin. En réalité l'endpoint exposé par rental-service est `localhost:8083/rentals/*`.
+`RewritePath` permet de réécrire le chemin. En réalité l'endpoint exposé par Rental service est `localhost:8083/rentals/*`.
 
-Considérons que nous souhaitons recevoir le logement 2 avec `localhost:8080/rental/api/v1/rentals/1`:
+Considérons que nous souhaitons recevoir le logement 2 avec l'url du Gateway : `localhost:8080/rental/api/v1/rentals/1`:
 
 ![gateway rewrite path](./diagrams/gateway-rewrite-path.png)
 
-`Rental-service` expose l'endpoint`localhost:8083/rentals/{id}`. Ce qui implique que Gateway doit faire une requête à ledit endpoint. `RewritePath` indique que Gateway va récupérer le segment `rentals/2` et fait une requête à rental-service avec l'endpoint `localhost:8083/rentals/2`.
+`Rental-service` expose l'endpoint`localhost:8083/rentals/{id}`. Ce qui implique que Gateway doit faire une requête à ledit endpoint. `RewritePath` indique que Gateway va récupérer le segment `rentals/2` et l'utilise pour fait une requête à Rental service avec l'endpoint `localhost:8083/rentals/2`.
 
-En réalité, `RewritePath` permet d'ajouter un préfixe afin de **versionner** l'API de rental-service. Nous pouvons très bien laisser l'endpoint `/rentals` sans réécrire le chemin.
+En réalité, `RewritePath` permet d'ajouter un préfixe afin de **versionner** l'API de Rental service. Nous pouvons très bien laisser l'endpoint `/rentals` sans réécrire le chemin.
 
 ```yml
 routes:
@@ -126,14 +130,12 @@ routes:
     predicates:
       - Path=/rentals/**
     filters:
-      - AuthFilter
+      - JwtFilter
 ```
-
-![image](https://user-images.githubusercontent.com/93189167/227244975-ea603e87-b5bc-4abe-97ee-c4c604e52405.png)
 
 ### Auth service
 
-Ce service est responsable de la gestion des utilisateurs. Il permet de créer un compte, de se connecter, de se déconnecter et de valider.
+Ce service est responsable de la gestion des utilisateurs. Il permet de créer un compte, de se connecter et de se déconnecter.
 
 Nous avons utilisé [Spring Boot Security](https://docs.spring.io/spring-security/reference/index.html) pour la gestion de l'authentification. Spring Boot Security est un framework qui permet de gérer l'authentification et l'autorisation. Elle est basée sur Spring Security.
 
@@ -153,7 +155,7 @@ public Account saveAccount(Account credential) {
 
 La méthode utilise `passwordEncoder` qui est une instance de `BCryptPasswordEncoder` pour hash le mot de passe.
 
-`BCryptPasswordEncoder` est une implémentation de l'algorithme de hash BCrypt.
+`BCryptPasswordEncoder` est une implémentation de l'algorithme de hash [BCrypt.](https://fr.wikipedia.org/wiki/Bcrypt)
 
 ### Housing service
 
@@ -167,7 +169,7 @@ Ce service est responsable de la gestion des locations. Il permet de créer une 
 
 Feign est un client REST déclaratif. Il permet d'écrire des requêtes REST en utilisant des interfaces Java.
 
-Reprenons l'exemple de la lecture d'un logement vu dans la partie [précédente](#vue-d'ensemble-d'interaction-entre-les-microservices).
+Reprenons l'exemple de la lecture d'un logement vu dans la partie [précédente](#vue-densemble-des-interactions-entre-les-microservices).
 
 Afin d'appeler le rental service depuis le housing service, nous avons créé une interface `RentalServiceClient` dans le housing service:
 
@@ -209,21 +211,57 @@ Afin de sécuriser notre API, nous utilisons JSON Web Token (JWT), un standard o
 
 Nous avons utilisé la bibliothèque Maven [JJWT API](https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api).
 
-### 1. Génération du token
+### 1. Génération du token dans Auth service
 
-Nous avons créer une méthode `generateToken()` dans `Authservice` qui permet de générer le token à partir du nom d'utilisateur:
+Nous avons créer une classe `JwtUtil` qui permet de générer un token JWT:
+
+```java
+// JwtUtil.java
+
+@Component
+public class JwtUtil {
+    @Value("${jwt.secret}")
+    private String secret;
+
+    public String generateToken(String subject) {
+        Key key = Keys.hmacShaKeyFor(secret.getBytes());
+        Date now = new Date();
+        Date expiryDate = new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1));
+
+        return Jwts.builder()
+                .setSubject(subject)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(key)
+                .compact();
+    }
+}
+```
+
+JWT est généré avec l'algorithme signature HMAC SHA-256. Il est signé avec la clé secrète `secret` que l'on lit dans le fichier `application.yml` avec l'annotation `@Value` :
+
+```yml
+jwt:
+  secret: CeQueVousProposezCestDeLaPoudreDePerlinpinpin
+```
+
+Un token signé permet de vérifier l'intégrité des claims (données) du token.
+
+Nous créons ensuite une abstraction `generateToken` dans `AuthService`:
 
 ```java
 // AuthService.java
-j
+
 public String generateToken(String username) {
     return jwtUtil.generateToken(username);
 }
 ```
 
-Nous l'appelons dans `AccountController` dans la route `/login`:
+Enfin, nous l'appelons dans `AccountController` dans la route `/login`:
 
 ```java
+// AccountController.java
+
 @PostMapping("/login")
 public String login(@RequestBody AuthRequest authRequest) {
     Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
@@ -236,7 +274,98 @@ public String login(@RequestBody AuthRequest authRequest) {
 }
 ```
 
-### 2. Validation du token
+### 2. Validation du token dans l'API Gateway
+
+Le gateway est responsable de valider le token JWT. Il vérifie que le token est signé avec la bonne clé secrète et que le token n'a pas expiré.
+
+Comme expliqué précédemment à la partie [Auth service](#auth-service), nous avons créer un filtre `JwtFilter` qui permet de valider le token JWT à chaque requête.
+
+Avant tout, nous créons d'abord la méthode `isValidToken` dans la classe utilitaire `JwtUtil`:
+
+```java
+// JwtUtil.java
+@Component
+public class JwtUtil {
+    @Value("${jwt.secret}")
+    private String secret;
+
+    public Claims getClaims(String token) {
+        Key key = Keys.hmacShaKeyFor(secret.getBytes());
+
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    public boolean isValidToken(String token) {
+        try {
+            return getClaims(token).getExpiration().after(new Date(System.currentTimeMillis()));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+}
+```
+
+`getClaims()` permet de récupérer les claims du token et d'y extraire la date d'expiration.
+
+`isValidToken()` vérifie que la date d'expiration n'est pas encore passé, c'est-à-dire supérieure à la date actuelle. Le cas échéant, le token est invalide.
+
+Ensuite, nous appelons `isValidToken()` dans le filtre `JwtFilter`:
+
+```java
+// JwtFilter.java
+
+@Component
+public class JwtFilter extends AbstractGatewayFilterFactory<JwtFilter.Config> {
+
+    // ... some code
+
+    @Override
+    public GatewayFilter apply(Config config) {
+        return (exchange, chain) -> {
+            ServerHttpRequest request = exchange.getRequest();
+
+            // Check if the request is public or secured
+            if (routeValidator.isSecured.test(request)) {
+                if (!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                    return exchange.getResponse().setComplete();
+                }
+
+                String authorizationHeader = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+                String jwt = authorizationHeader.replace("Bearer", "");
+
+                if (!jwtUtil.isValidToken(jwt)) { // <-- appel de la méthode isValidToken()
+                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                    return exchange.getResponse().setComplete();
+                }
+            }
+            return chain.filter(exchange);
+
+        };
+    }
+}
+```
+
+Le header `Authorization` est du format `Bearer <token>`. Nous utilisons la méthode `replace` pour enlever le mot `Bearer` et récupérer le token :
+
+```java
+String jwt = authorizationHeader.replace("Bearer", "");
+```
+
+Si le token est valide, nous appelons la méthode `chain.filter(exchange)` pour passer à la requête suivante. Sinon, nous retournons une erreur 401.
+
+```java
+  if (!jwtUtil.isValidToken(jwt)) {
+    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+    return exchange.getResponse().setComplete();
+  }
+return chain.filter(exchange);
+```
 
 ## Gestion de déploiement
 
