@@ -25,11 +25,15 @@ L'objectif est de créer une application de location de logement basée sur l’
 
 ## Usage
 
-Exécuter le projet avec Docker :
+> ⚠️ **Une version déployée de ce projet est à votre disposition sur [http://simona-immo.antoinedespres.fr:8080/swagger-ui.html](http://simona-immo.antoinedespres.fr:8080/swagger-ui.html)**
+
+Pour exécuter le projet localement avec Docker :
 
 ```bash
 docker-compose up
 ```
+
+À noter : le chargement du Swagger peut prendre du temps, nous vous recommandons de patienter une trentaine de secondes après le démarrage du conteneur.  
 
 Vous retrouverez le swagger à l'adresse : http://localhost:8080/swagger-ui.html
 
