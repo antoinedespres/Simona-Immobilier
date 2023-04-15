@@ -6,7 +6,9 @@ import com.simona.housing.dto.RentalDto;
 import com.simona.housing.dto.ApiResponse;
 import com.simona.housing.model.Housing;
 import com.simona.housing.web.repository.HousingRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -49,7 +51,10 @@ public class HousingController {
 
     @Operation(summary = "Find housing by id")
     @GetMapping("/housings/{id}")
-    public ResponseEntity<ApiResponse<HousingDto>> findById(@PathVariable Long id, @RequestHeader(required = false, value = HttpHeaders.AUTHORIZATION) String authorization) {
+
+    // Ignore the authorization header
+    public ResponseEntity<ApiResponse<HousingDto>> findById(@PathVariable Long id,
+                                                           @Parameter(hidden = true) @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
         if (id == null || id <= 0)
             return ResponseEntity.badRequest().body(new ApiResponse<>(null, "Id is required"));
 
