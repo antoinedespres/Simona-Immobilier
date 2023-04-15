@@ -99,18 +99,5 @@ services:
       - db-data:/var/lib/postgresql/data
       - ./postgresql/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
 
-  # client:
-  #   image: node:16-alpine
-  #   working_dir: /web
-  #   ports:
-  #     - 3000:3000
-  #   environment:
-  #     REACT_APP_API_URL: http://localhost:4000/api
-  #   volumes:
-  #     # Mount the current directory 'client' to /client inside the container
-  #     # This allows us to modify the code on the fly, without having to rebuild the image.
-  #     - ./web/:/web
-  #   command: sh -c "npm install && npm start"
-
 volumes:
   db-data:
