@@ -35,10 +35,32 @@ Vous retrouverez le swagger à l'adresse : http://localhost:8080/swagger-ui.htm
 
 Vous pouvez visionner toutes les instances de microservice ici: http://localhost:8761
 
+Afin de tester l'API, il faut s'enregistrer et se connecter dans Auth service :
+
+![swagger register endpoint](./images/swagger-register-endpoint.png)
+
+Il faut maintenant se connecter afin d'avoir le JWT :
+
+![swagger login endpoint](./images/swagger-login-endpoint.png)
+
+Nous pouvons copier le token retourné par `/login` :
+
+![swagger login endpoint token response](./images/swagger-login-jwt-response.png)
+
+Choisissez le Housing service et ajoutez le token :
+
+![swagger housing api auth step 1](./images/swagger-housing-api-auth-step-1.png)
+
+![swagger housing api auth step 2](./images/swagger-housing-api-auth-step-2.png)
+
+Testez `/housings` pour qu'il retourne une réponse 200 avec la liste de logmeents :
+
+![swagger housing api auth step 3](./images/swagger-housing-api-auth-step-3.png)
+
 ## Dépendances
 
 | Nom                                                                                  | Description                                                                                                                          |
-| ------------------------------------------------------------------------------------ |--------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | [Spring Boot 2.7.10](https://spring.io/)                                             | Framework Java qui permet de développer rapidement des applications Web et des microservices.                                        |
 | [Spring Cloud Gateway](https://cloud.spring.io/spring-cloud-gateway/reference/html/) | Une API Gateway qui se construit sur l'écosystème Spring, à savoir Spring 5, Spring boot 2 et Projet Reactor.                        |
 | [Eureka](https://cloud.spring.io/spring-cloud-netflix/reference/html/)               | Bibliothèque mettant en place un registre contenant toutes les instances de chaque microservice déployé dans des serveurs différents |
@@ -207,7 +229,7 @@ public ResponseEntity<ApiResponse<HousingDto>> findById(@PathVariable Long id, @
 
 ## Gestion de l'authentification
 
-Afin de sécuriser notre API, nous utilisons JSON Web Token (JWT), un standard ouvert ([RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)) qui définit que l'échange d'informations entre deux parties peut être sécurisé et vérifié grâce à un jeton (*token*) ayant une date d'expiration.
+Afin de sécuriser notre API, nous utilisons JSON Web Token (JWT), un standard ouvert ([RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)) qui définit que l'échange d'informations entre deux parties peut être sécurisé et vérifié grâce à un jeton (_token_) ayant une date d'expiration.
 
 Nous avons utilisé la bibliothèque Maven [JJWT API](https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api).
 
