@@ -8,7 +8,6 @@ import javax.persistence.*;
 public class Housing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private long id;
     private int surface;
     private int nbRooms;
