@@ -22,7 +22,7 @@ public class JwtUtil {
     public String generateToken(String subject) {
         Key key = Keys.hmacShaKeyFor(secret.getBytes());
         Date now = new Date();
-        Date expiryDate = new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1));
+        Date expiryDate = new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(7));
 
         return Jwts.builder()
                 .setSubject(subject)
