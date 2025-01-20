@@ -4,6 +4,12 @@
 
 Housing API based on the microservice architecture.
 
+![example 1](./docs/images/example-1.png)
+![example 2](./docs/images/example-2.png)
+![example 3](./docs/images/example-3.png)
+![example 4](./docs/images/example-4.png)
+
+
 ## Getting started
 
 You can generate a new microservice using [this configuration on Spring initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.7.10&packaging=jar&jvmVersion=11&groupId=com.simonaimmobilier.rental&artifactId=rental-service&name=rental-service&description=Rental%20service&packageName=com.simona.rental&dependencies=web,data-jpa,postgresql)
